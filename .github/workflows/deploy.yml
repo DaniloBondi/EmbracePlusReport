@@ -17,8 +17,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Installiamo solo lo stretto necessario per l'esportazione
-          pip install shinylive shiny numpy plotly
+          pip install shinylive shiny numpy matplotlib pandas
 
       - name: Export App to static site
         run: |
