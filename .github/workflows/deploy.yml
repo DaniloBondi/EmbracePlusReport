@@ -17,7 +17,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install shinylive shiny numpy pandas neurokit2 matplotlib scipy
+          pip install shinylive shiny numpy plotly
 
       - name: Export App to static site
         run: |
