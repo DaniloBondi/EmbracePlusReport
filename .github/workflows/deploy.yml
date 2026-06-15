@@ -1,0 +1,33 @@
+name: Deploy Shinylive App
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          # Installiamo solo lo stretto necessario per l'esportazione
+          pip install shinylive shiny numpy plotly
+
+      - name: Export App to static site
+        run: |
+          # Esporta l'app direttamente nella cartella 'site'
+          shinylive export . site
+
+      - name: Upload to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
